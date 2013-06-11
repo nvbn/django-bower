@@ -4,7 +4,8 @@ import subprocess
 
 def bower_install(package):
     """Install package from bower"""
-    subprocess.Popen(
+    proc = subprocess.Popen(
         ['bower', 'install', package],
         cwd=conf.COMPONENTS_ROOT,
     )
+    proc.wait()
