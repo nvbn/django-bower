@@ -1,4 +1,4 @@
-BOWER_COMPONENTS_PATH = '/tmp/bower_components/'
+BOWER_COMPONENTS_ROOT = '/tmp/bower_components/'
 
 STATIC_ROOT = '/tmp/bower_static/'
 
