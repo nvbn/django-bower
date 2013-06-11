@@ -8,3 +8,20 @@ BOWER_INSTALLED_APPS = (
     'jquery',
     'underscore',
 )
+
+SECRET_KEY = 'iamdjangobower'
+
+INSTALLED_APPS = (
+    'djangobower',
+)
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
+}
