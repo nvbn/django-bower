@@ -1,5 +1,6 @@
 from django.core.management import call_command
 from django.test import TestCase
+from django.conf import settings
 from mock import MagicMock
 from . import shortcuts
 
@@ -9,7 +10,7 @@ class BowerInstallCase(TestCase):
 
     def setUp(self):
         shortcuts.bower_install = MagicMock()
-        self.apps = ('jquery', 'underscore')
+        self.apps = settings.BOWER_INSTALLED_APPS
 
     def test_install(self):
         """Test install bower packages"""
