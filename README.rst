@@ -22,7 +22,7 @@ Specifie path to components root (you need to use absolute path) and create it::
 
     BOWER_COMPONENTS_ROOT = '/PROJECT_ROOT/components/'
 
-You can see example settings file in `example project <https://github.com/nvbn/django-bower/tree/master/example/settings.py>`_.
+You can see example settings file in `example project <https://github.com/nvbn/django-bower/blob/master/example/example/settings.py>`_.
 
 Usage
 -----
