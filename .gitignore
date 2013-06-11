@@ -31,3 +31,9 @@ nbproject
 .idea
 
 django_bower.egg-info
+example/db
+example/components/*
+example/static/*
+
+!example/components/.gitkeep
+!example/static/.gitkeep
