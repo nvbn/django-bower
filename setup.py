@@ -7,16 +7,20 @@ setup(name='django-bower',
       version=version,
       description="Integrate django with bower",
       long_description="""\
+      Easy way to use bower with your django project
 """,
-      classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
+      classifiers=[
+          'Framework :: Django',
+          'Programming Language :: JavaScript',
+      ],
       keywords='',
       author='Vladimir Iakovlev',
       author_email='nvbn.rm@gmail.com',
-      url='',
-      license='',
+      url='https://github.com/nvbn/django-bower',
+      license='BSD',
       packages=find_packages(exclude=['ez_setup', 'example', 'tests']),
       include_package_data=True,
-      zip_safe=False,
+      zip_safe=True,
       install_requires=[
           'django',
           'mock',

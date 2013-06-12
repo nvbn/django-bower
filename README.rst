@@ -8,7 +8,7 @@ Installation
 
 Install django-bower package::
 
-    pip install -e "git+https://github.com/nvbn/django-bower.git#egg=django-bower"
+    pip install django-bower
 
 Add django-bower to `INSTALLED_APPS` in your settings::
 
