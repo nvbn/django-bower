@@ -48,6 +48,10 @@ In production you need to call `bower_install` before `collectstatic`::
     ./manage.py bower_install
     ./manage.py collectstatic
 
+You can use `bower_freeze` to receive `BOWER_INSTALLED_APPS` with fixed current versions::
+
+    ./manage.py bower_freeze
+
 Running tests
 -------------
 
