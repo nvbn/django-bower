@@ -30,7 +30,7 @@ Usage
 Specifie `BOWER_INSTALLED_APPS` in settings, like::
 
     BOWER_INSTALLED_APPS = (
-        'jquery',
+        'jquery#1.9',
         'underscore',
     )
 
