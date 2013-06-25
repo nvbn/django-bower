@@ -6,6 +6,7 @@ from mock import MagicMock
 from .finders import BowerFinder
 from . import shortcuts, conf
 import os
+import shutil
 
 
 class BowerInstallCase(TestCase):
@@ -14,6 +15,14 @@ class BowerInstallCase(TestCase):
     def setUp(self):
         shortcuts.bower_install = MagicMock()
         self.apps = settings.BOWER_INSTALLED_APPS
+
+    def test_create_components_root(self):
+        """Test create components root"""
+        if os.path.exists(conf.COMPONENTS_ROOT):
+            shutil.rmtree(conf.COMPONENTS_ROOT)
+        call_command('bower_install')
+
+        self.assertTrue(os.path.exists(conf.COMPONENTS_ROOT))
 
     def test_install(self):
         """Test install bower packages"""

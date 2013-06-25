@@ -18,7 +18,7 @@ Add staticfinder to `STATICFILES_FINDERS`::
 
     'djangobower.finders.BowerFinder',
 
-Specifie path to components root (you need to use absolute path) and create it::
+Specifie path to components root (you need to use absolute path)::
 
     BOWER_COMPONENTS_ROOT = '/PROJECT_ROOT/components/'
 
