@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '3'
+version = '4'
 
 setup(
     name='django-bower',
