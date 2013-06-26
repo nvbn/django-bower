@@ -1,5 +1,6 @@
 from . import conf
 import subprocess
+import sys
 
 
 def bower_install(packages):
@@ -21,6 +22,8 @@ def bower_freeze():
     proc.wait()
 
     for line in proc.stdout.readlines():
-        prepared_line = line.decode()
+        prepared_line = line.decode(
+            sys.getfilesystemencoding(),
+        )
         if ' ' in prepared_line:
             yield prepared_line.split(' ')[1][:-1]
