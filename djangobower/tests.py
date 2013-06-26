@@ -2,7 +2,7 @@ from django.core.management import call_command
 from django.test import TestCase
 from django.conf import settings
 from StringIO import StringIO
-from mock import MagicMock
+from mock import MagicMock, patch
 from .finders import BowerFinder
 from . import shortcuts, conf
 import os
@@ -27,22 +27,16 @@ class BowerInstallCase(TestCase):
     def test_install(self):
         """Test install bower packages"""
         call_command('bower_install')
-
-        for num, install_call in enumerate(
-            shortcuts.bower_install.call_args_list
-        ):
-            self.assertEqual(install_call[0][0], self.apps[num])
+        shortcuts.bower_install.assert_called_once_with(
+            self.apps,
+        )
 
 
 class BowerFinderCase(TestCase):
     """Test finding installed with bower files"""
 
     def setUp(self):
-        try:
-            os.mkdir(conf.COMPONENTS_ROOT)
-        except OSError:
-            pass
-        shortcuts.bower_install('jquery')
+        shortcuts.bower_install(['jquery'])
         self.finder = BowerFinder()
 
     def test_find(self):
@@ -65,13 +59,9 @@ class BowerFreezeCase(TestCase):
     """Case for bower freeze"""
 
     def setUp(self):
-        try:
-            os.mkdir(conf.COMPONENTS_ROOT)
-        except OSError:
-            pass
-        shortcuts.bower_install('jquery')
-        shortcuts.bower_install('backbone')
-        shortcuts.bower_install('underscore')
+        shortcuts.bower_install(['jquery'])
+        shortcuts.bower_install(['backbone'])
+        shortcuts.bower_install(['underscore'])
 
     def test_freeze_shortcut(self):
         """Test freeze shortcut"""

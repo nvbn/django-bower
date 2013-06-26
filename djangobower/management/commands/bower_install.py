@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.conf import settings
-from ...shortcuts import bower_install
-from ... import conf
+from ... import conf, shortcuts
 import os
 
 
@@ -12,5 +11,4 @@ class Command(BaseCommand):
         if not os.path.exists(conf.COMPONENTS_ROOT):
             os.mkdir(conf.COMPONENTS_ROOT)
 
-        for app in settings.BOWER_INSTALLED_APPS:
-            bower_install(app)
+        shortcuts.bower_install(settings.BOWER_INSTALLED_APPS)

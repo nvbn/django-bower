@@ -2,10 +2,10 @@ from . import conf
 import subprocess
 
 
-def bower_install(package):
+def bower_install(packages):
     """Install package from bower"""
     proc = subprocess.Popen(
-        ['bower', 'install', package],
+        ['bower', 'install'] + list(packages),
         cwd=conf.COMPONENTS_ROOT,
     )
     proc.wait()
