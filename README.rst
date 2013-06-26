@@ -75,3 +75,7 @@ Prepare project with::
 And run project with::
 
     ./manage.py runserver
+
+Python 3 support
+----------------
+django-bower support python 3.3+

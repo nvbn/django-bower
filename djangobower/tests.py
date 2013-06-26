@@ -1,7 +1,7 @@
 from django.core.management import call_command
 from django.test import TestCase
 from django.conf import settings
-from StringIO import StringIO
+from six import StringIO
 from mock import MagicMock, patch
 from .finders import BowerFinder
 from . import shortcuts, conf
@@ -68,7 +68,7 @@ class BowerFreezeCase(TestCase):
         installed = [
             package.split('#')[0] for package in shortcuts.bower_freeze()
         ]
-        self.assertItemsEqual(installed, ['backbone', 'jquery', 'underscore'])
+        self.assertListEqual(installed, ['backbone', 'jquery', 'underscore'])
 
     def test_management_command(self):
         """Test freeze management command"""
