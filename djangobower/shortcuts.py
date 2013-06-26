@@ -21,5 +21,6 @@ def bower_freeze():
     proc.wait()
 
     for line in proc.stdout.readlines():
-        if ' ' in line:
-            yield line.split(' ')[1][:-1]
+        prepared_line = line.decode()
+        if ' ' in prepared_line:
+            yield prepared_line.split(' ')[1][:-1]

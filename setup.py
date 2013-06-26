@@ -24,6 +24,7 @@ setup(name='django-bower',
       install_requires=[
           'django',
           'mock',
+          'six',
       ],
       entry_points="""
       # -*- Entry points: -*-
