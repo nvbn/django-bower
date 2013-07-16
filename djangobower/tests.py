@@ -36,6 +36,7 @@ class BowerFinderCase(TestCase):
     """Test finding installed with bower files"""
 
     def setUp(self):
+        shortcuts.create_components_root()
         shortcuts.bower_install(['jquery'])
         self.finder = BowerFinder()
 
@@ -59,6 +60,7 @@ class BowerFreezeCase(TestCase):
     """Case for bower freeze"""
 
     def setUp(self):
+        shortcuts.create_components_root()
         shortcuts.bower_install(['jquery'])
         shortcuts.bower_install(['backbone'])
         shortcuts.bower_install(['underscore'])

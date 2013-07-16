@@ -8,7 +8,5 @@ class Command(BaseCommand):
     help = 'Install bower apps'
 
     def handle(self, *args, **options):
-        if not os.path.exists(conf.COMPONENTS_ROOT):
-            os.mkdir(conf.COMPONENTS_ROOT)
-
+        shortcuts.create_components_root()
         shortcuts.bower_install(settings.BOWER_INSTALLED_APPS)
