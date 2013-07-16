@@ -5,4 +5,4 @@ python:
 install:
   - pip install . --use-mirrors
 script:
-  - django-admin.py test --settings=djangobower.test_settings djangobower
+  - TEST_PROJECT_ROOT=/home/travis/ django-admin.py test --settings=djangobower.test_settings djangobower
