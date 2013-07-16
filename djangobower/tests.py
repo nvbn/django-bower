@@ -9,6 +9,12 @@ import os
 import shutil
 
 
+def remove_components_root():
+    """Remove components root if exists"""
+    if os.path.exists(conf.COMPONENTS_ROOT):
+        shutil.rmtree(conf.COMPONENTS_ROOT)
+
+
 class BowerInstallCase(TestCase):
     """Test case for bower_install management command"""
 
@@ -16,10 +22,12 @@ class BowerInstallCase(TestCase):
         shortcuts.bower_install = MagicMock()
         self.apps = settings.BOWER_INSTALLED_APPS
 
+    def tearDown(self):
+        remove_components_root()
+
     def test_create_components_root(self):
         """Test create components root"""
-        if os.path.exists(conf.COMPONENTS_ROOT):
-            shutil.rmtree(conf.COMPONENTS_ROOT)
+        remove_components_root()
         call_command('bower_install')
 
         self.assertTrue(os.path.exists(conf.COMPONENTS_ROOT))
@@ -39,6 +47,9 @@ class BowerFinderCase(TestCase):
         shortcuts.create_components_root()
         shortcuts.bower_install(['jquery'])
         self.finder = BowerFinder()
+
+    def tearDown(self):
+        remove_components_root()
 
     def test_find(self):
         """Test staticfinder find"""
@@ -65,6 +76,9 @@ class BowerFreezeCase(TestCase):
         shortcuts.bower_install(['backbone'])
         shortcuts.bower_install(['underscore'])
         shortcuts.bower_install(['typeahead.js'])
+
+    def tearDown(self):
+        remove_components_root()
 
     def test_freeze_shortcut(self):
         """Test freeze shortcut"""
