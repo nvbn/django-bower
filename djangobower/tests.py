@@ -62,6 +62,7 @@ class BowerFreezeCase(TestCase):
         shortcuts.bower_install(['jquery'])
         shortcuts.bower_install(['backbone'])
         shortcuts.bower_install(['underscore'])
+        shortcuts.bower_install(['typeahead.js'])
 
     def test_freeze_shortcut(self):
         """Test freeze shortcut"""
