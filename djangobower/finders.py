@@ -10,10 +10,19 @@ class BowerFinder(FileSystemFinder):
 
     def __init__(self, apps=None, *args, **kwargs):
         self.locations = [
-            ('', os.path.join(conf.COMPONENTS_ROOT, 'components')),
+            ('', self._get_bower_components_location()),
         ]
         self.storages = SortedDict()
 
         filesystem_storage = FileSystemStorage(location=self.locations[0][1])
         filesystem_storage.prefix = self.locations[0][0]
         self.storages[self.locations[0][1]] = filesystem_storage
+
+    def _get_bower_components_location(self):
+        """Get bower components location"""
+        path = os.path.join(conf.COMPONENTS_ROOT, 'bower_components')
+
+        # for old bower versions:
+        if not os.path.exists(path):
+            path = os.path.join(conf.COMPONENTS_ROOT, 'components')
+        return path

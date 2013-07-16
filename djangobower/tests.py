@@ -55,7 +55,7 @@ class BowerFinderCase(TestCase):
         """Test staticfinder find"""
         path = self.finder.find('jquery/jquery.min.js')
         self.assertEqual(path, os.path.join(
-            conf.COMPONENTS_ROOT, 'components', 'jquery/jquery.min.js',
+            conf.COMPONENTS_ROOT, 'bower_components', 'jquery/jquery.min.js',
         ))
 
     def test_list(self):
