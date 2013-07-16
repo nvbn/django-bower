@@ -89,7 +89,7 @@ Now you can run tests with:
 
     django-admin.py test --settings=djangobower.test_settings djangobower
 
-You can show current tests status in `travis ci<https://travis-ci.org/nvbn/django-bower/>`_.
+You can show current tests status in `travis ci <https://travis-ci.org/nvbn/django-bower/>`_.
 
 Example project
 ---------------
