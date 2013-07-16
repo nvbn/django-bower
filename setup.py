@@ -12,6 +12,8 @@ setup(
     classifiers=[
         'Framework :: Django',
         'Programming Language :: JavaScript',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
     ],
     keywords='',
     author='Vladimir Iakovlev',
