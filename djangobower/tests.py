@@ -69,7 +69,10 @@ class BowerFreezeCase(TestCase):
         installed = [
             package.split('#')[0] for package in shortcuts.bower_freeze()
         ]
-        self.assertListEqual(installed, ['backbone', 'jquery', 'underscore'])
+        self.assertListEqual(installed, [
+            'backbone', 'jquery',
+            'typeahead.js', 'underscore',
+        ])
 
     def test_management_command(self):
         """Test freeze management command"""
