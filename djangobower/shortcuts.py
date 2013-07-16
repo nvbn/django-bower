@@ -21,9 +21,15 @@ def bower_freeze():
     )
     proc.wait()
 
+    yielded = []
+
     for line in proc.stdout.readlines():
         prepared_line = line.decode(
             sys.getfilesystemencoding(),
         )
-        if ' ' in prepared_line:
-            yield prepared_line.split(' ')[1][:-1]
+        if '#' in prepared_line:
+            for part in prepared_line.split(' '):
+                if '#' in part and part not in yielded:
+                    yield part
+                    yielded.append(part)
+                    break
