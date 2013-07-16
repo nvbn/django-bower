@@ -14,4 +14,6 @@ Now you can run tests with:
 
     django-admin.py test --settings=djangobower.test_settings djangobower
 
+You can change test project root with `TEST_PROJECT_ROOT` environment variable. By default it is `/tmp`.
+
 You can show current tests status in `travis ci <https://travis-ci.org/nvbn/django-bower/>`_.

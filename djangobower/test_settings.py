@@ -1,6 +1,12 @@
-BOWER_COMPONENTS_ROOT = '/tmp/bower_components/'
+import os
 
-STATIC_ROOT = '/tmp/bower_static/'
+TEST_PROJECT_ROOT = os.path.abspath(
+    os.environ.get('TEST_PROJECT_ROOT', '/tmp/'),
+)
+
+BOWER_COMPONENTS_ROOT = os.path.join(TEST_PROJECT_ROOT, 'bower_components')
+
+STATIC_ROOT = os.path.join(TEST_PROJECT_ROOT, 'bower_static')
 
 STATIC_URL = '/static/'
 

@@ -74,41 +74,6 @@ You can use `bower_freeze` to receive `BOWER_INSTALLED_APPS` with fixed current 
 
     ./manage.py bower_freeze
 
-Running tests
--------------
-
-For running tests you need to install `django-bower` in development mode with:
-
-.. code-block:: bash
-
-    python setup.py develop
-
-Now you can run tests with:
-
-.. code-block:: bash
-
-    django-admin.py test --settings=djangobower.test_settings djangobower
-
-You can show current tests status in `travis ci <https://travis-ci.org/nvbn/django-bower/>`_.
-
-Example project
----------------
-
-For running example project you need to change dir to `example`.
-
-Prepare project with:
-
-.. code-block:: bash
-
-    ./manage.py syncdb
-    ./manage.py bower_install
-
-And run project with:
-
-.. code-block:: bash
-
-    ./manage.py runserver
-
 Python 3 support
 ----------------
 django-bower support python 3.3+
