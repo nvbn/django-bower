@@ -2,32 +2,37 @@
 Usage
 *****
 
-Specifie `BOWER_INSTALLED_APPS` in settings, like::
-    .. code-block:: python
+Specifie `BOWER_INSTALLED_APPS` in settings, like:
 
-        BOWER_INSTALLED_APPS = (
-            'jquery#1.9',
-            'underscore',
-        )
+.. code-block:: python
 
-Download bower packages with management command::
-    .. code-block:: bash
+    BOWER_INSTALLED_APPS = (
+        'jquery#1.9',
+        'underscore',
+    )
 
-        ./manage.py bower_install
+Download bower packages with management command:
 
-Add scripts in template, like::
-    .. code-block:: html+django
+.. code-block:: bash
 
-        {% load static %}
-        <script type="text/javascript" src='{% static 'jquery/jquery.js' %}'></script>
+    ./manage.py bower_install
 
-In production you need to call `bower_install` before `collectstatic`::
-    .. code-block:: bash
+Add scripts in template, like:
 
-        ./manage.py bower_install
-        ./manage.py collectstatic
+.. code-block:: html+django
 
-You can use `bower_freeze` to receive `BOWER_INSTALLED_APPS` with fixed current versions::
-    .. code-block:: bash
+    {% load static %}
+    <script type="text/javascript" src='{% static 'jquery/jquery.js' %}'></script>
 
-        ./manage.py bower_freeze
+In production you need to call `bower_install` before `collectstatic`:
+
+.. code-block:: bash
+
+    ./manage.py bower_install
+    ./manage.py collectstatic
+
+You can use `bower_freeze` to receive `BOWER_INSTALLED_APPS` with fixed current versions:
+
+.. code-block:: bash
+
+    ./manage.py bower_freeze

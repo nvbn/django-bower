@@ -2,12 +2,14 @@
 Running tests
 *************
 
-For running tests you need to install `django-bower` in development mode with::
-    .. code-block:: bash
+For running tests you need to install `django-bower` in development mode with:
 
-        python setup.py develop
+.. code-block:: bash
 
-Now you can run tests with::
-    .. code-block:: bash
+    python setup.py develop
 
-        django-admin.py test --settings=djangobower.test_settings djangobower
+Now you can run tests with:
+
+.. code-block:: bash
+
+    django-admin.py test --settings=djangobower.test_settings djangobower

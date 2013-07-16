@@ -4,13 +4,15 @@ Example project
 
 For running example project you need to change dir to `example`.
 
-Prepare project with::
-    .. code-block:: bash
+Prepare project with:
 
-        ./manage.py syncdb
-        ./manage.py bower_install
+.. code-block:: bash
 
-And run project with::
-    .. code-block:: bash
+    ./manage.py syncdb
+    ./manage.py bower_install
 
-        ./manage.py runserver
+And run project with:
+
+.. code-block:: bash
+
+    ./manage.py runserver
