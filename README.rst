@@ -10,89 +10,102 @@ Read full documentation on `read-the-docs <https://django-bower.readthedocs.org/
 Installation
 ------------
 
-Install django-bower package::
-    .. code-block:: bash
+Install django-bower package:
 
-        pip install django-bower
+.. code-block:: bash
 
-Add django-bower to `INSTALLED_APPS` in your settings::
-    .. code-block:: python
+    pip install django-bower
 
-        'djangobower',
+Add django-bower to `INSTALLED_APPS` in your settings:
 
-Add staticfinder to `STATICFILES_FINDERS`::
-    .. code-block:: python
+.. code-block:: python
 
-        'djangobower.finders.BowerFinder',
+    'djangobower',
 
-Specifie path to components root (you need to use absolute path)::
-    .. code-block:: python
+Add staticfinder to `STATICFILES_FINDERS`:
 
-        BOWER_COMPONENTS_ROOT = '/PROJECT_ROOT/components/'
+.. code-block:: python
+
+    'djangobower.finders.BowerFinder',
+
+Specifie path to components root (you need to use absolute path):
+
+.. code-block:: python
+
+    BOWER_COMPONENTS_ROOT = '/PROJECT_ROOT/components/'
 
 You can see example settings file in `example project <https://github.com/nvbn/django-bower/blob/master/example/example/settings.py>`_.
 
 Usage
 -----
 
-Specifie `BOWER_INSTALLED_APPS` in settings, like::
-    .. code-block:: python
+Specifie `BOWER_INSTALLED_APPS` in settings, like:
 
-        BOWER_INSTALLED_APPS = (
-            'jquery#1.9',
-            'underscore',
-        )
+.. code-block:: python
 
-Download bower packages with management command::
-    .. code-block:: bash
+    BOWER_INSTALLED_APPS = (
+        'jquery#1.9',
+        'underscore',
+    )
 
-        ./manage.py bower_install
+Download bower packages with management command:
 
-Add scripts in template, like::
-    .. code-block:: html+django
+.. code-block:: bash
 
-        {% load static %}
-        <script type="text/javascript" src='{% static 'jquery/jquery.js' %}'></script>
+    ./manage.py bower_install
 
-In production you need to call `bower_install` before `collectstatic`::
-    .. code-block:: bash
+Add scripts in template, like:
 
-        ./manage.py bower_install
-        ./manage.py collectstatic
+.. code-block:: html+django
 
-You can use `bower_freeze` to receive `BOWER_INSTALLED_APPS` with fixed current versions::
-    .. code-block:: bash
+    {% load static %}
+    <script type="text/javascript" src='{% static 'jquery/jquery.js' %}'></script>
 
-        ./manage.py bower_freeze
+In production you need to call `bower_install` before `collectstatic`:
+
+.. code-block:: bash
+
+    ./manage.py bower_install
+    ./manage.py collectstatic
+
+You can use `bower_freeze` to receive `BOWER_INSTALLED_APPS` with fixed current versions:
+
+.. code-block:: bash
+
+    ./manage.py bower_freeze
 
 Running tests
 -------------
 
-For running tests you need to install `django-bower` in development mode with::
-    .. code-block:: bash
+For running tests you need to install `django-bower` in development mode with:
 
-        python setup.py develop
+.. code-block:: bash
 
-Now you can run tests with::
-    .. code-block:: bash
+    python setup.py develop
 
-        django-admin.py test --settings=djangobower.test_settings djangobower
+Now you can run tests with:
+
+.. code-block:: bash
+
+    django-admin.py test --settings=djangobower.test_settings djangobower
 
 Example project
 ---------------
 
 For running example project you need to change dir to `example`.
 
-Prepare project with::
-    .. code-block:: bash
+Prepare project with:
 
-        ./manage.py syncdb
-        ./manage.py bower_install
+.. code-block:: bash
 
-And run project with::
-    .. code-block:: bash
+    ./manage.py syncdb
+    ./manage.py bower_install
 
-        ./manage.py runserver
+And run project with:
+
+.. code-block:: bash
+
+    ./manage.py runserver
 
 Python 3 support
 ----------------
