@@ -3,6 +3,7 @@ python:
   - "2.7"
   - "3.3"
 install:
+  - npm install -g bower
   - pip install . --use-mirrors
 script:
   - TEST_PROJECT_ROOT=/home/travis/ django-admin.py test --settings=djangobower.test_settings djangobower
