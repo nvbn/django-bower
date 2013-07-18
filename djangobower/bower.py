@@ -12,7 +12,7 @@ class BowerAdapter(object):
         self._components_root = components_root
 
     def is_bower_exists(self):
-        """Check is bower exists or raise exception"""
+        """Check is bower exists"""
         if shortcuts.is_executable(self._bower_path)\
                 or shortcuts.which(self._bower_path):
             return True

@@ -1,15 +1,11 @@
-from django.core.management.base import BaseCommand
 from django.conf import settings
 from ...bower import bower_adapter
-from ...exceptions import BowerNotInstalled
+from ..base import BaseBowerCommand
 
 
-class Command(BaseCommand):
+class Command(BaseBowerCommand):
     help = 'Install bower apps'
 
     def handle(self, *args, **options):
-        if not bower_adapter.is_bower_exists():
-            raise BowerNotInstalled()
-
-        bower_adapter.create_components_root()
+        super(Command, self).handle(*args, **options)
         bower_adapter.install(settings.BOWER_INSTALLED_APPS)
