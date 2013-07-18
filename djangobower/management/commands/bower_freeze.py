@@ -1,15 +1,15 @@
 from django.core.management.base import BaseCommand
 from pprint import pformat
-from ... import shortcuts
+from ...bower import bower_adapter
 
 
 class Command(BaseCommand):
     help = 'Freeze bower apps'
 
     def handle(self, *args, **options):
-        shortcuts.create_components_root()
+        bower_adapter.create_components_root()
 
-        packages = tuple(shortcuts.bower_freeze())
+        packages = tuple(bower_adapter.freeze())
         output = 'BOWER_INSTALLED_APPS = {}'.format(
             pformat(packages),
         )

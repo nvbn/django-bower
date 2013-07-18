@@ -1,12 +1,11 @@
 from django.core.management.base import BaseCommand
 from django.conf import settings
-from ... import conf, shortcuts
-import os
+from ...bower import bower_adapter
 
 
 class Command(BaseCommand):
     help = 'Install bower apps'
 
     def handle(self, *args, **options):
-        shortcuts.create_components_root()
-        shortcuts.bower_install(settings.BOWER_INSTALLED_APPS)
+        bower_adapter.create_components_root()
+        bower_adapter.install(settings.BOWER_INSTALLED_APPS)

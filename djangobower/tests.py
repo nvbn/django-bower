@@ -4,30 +4,35 @@ from django.conf import settings
 from six import StringIO
 from mock import MagicMock, patch
 from .finders import BowerFinder
-from . import shortcuts, conf
+from .bower import bower_adapter
+from . import conf
 import os
 import shutil
 
 
-def remove_components_root():
-    """Remove components root if exists"""
-    if os.path.exists(conf.COMPONENTS_ROOT):
-        shutil.rmtree(conf.COMPONENTS_ROOT)
+class BaseBowerCase(TestCase):
+    """Base bower test case"""
+
+    def tearDown(self):
+        self._remove_components_root()
+
+    def _remove_components_root(self):
+        """Remove components root if exists"""
+        if os.path.exists(conf.COMPONENTS_ROOT):
+            shutil.rmtree(conf.COMPONENTS_ROOT)
 
 
-class BowerInstallCase(TestCase):
+class BowerInstallCase(BaseBowerCase):
     """Test case for bower_install management command"""
 
     def setUp(self):
-        shortcuts.bower_install = MagicMock()
+        super(BowerInstallCase, self).setUp()
+        bower_adapter.install = MagicMock()
         self.apps = settings.BOWER_INSTALLED_APPS
-
-    def tearDown(self):
-        remove_components_root()
 
     def test_create_components_root(self):
         """Test create components root"""
-        remove_components_root()
+        self._remove_components_root()
         call_command('bower_install')
 
         self.assertTrue(os.path.exists(conf.COMPONENTS_ROOT))
@@ -35,21 +40,19 @@ class BowerInstallCase(TestCase):
     def test_install(self):
         """Test install bower packages"""
         call_command('bower_install')
-        shortcuts.bower_install.assert_called_once_with(
+        bower_adapter.install.assert_called_once_with(
             self.apps,
         )
 
 
-class BowerFinderCase(TestCase):
+class BowerFinderCase(BaseBowerCase):
     """Test finding installed with bower files"""
 
     def setUp(self):
-        shortcuts.create_components_root()
-        shortcuts.bower_install(['jquery'])
+        super(BowerFinderCase, self).setUp()
+        bower_adapter.create_components_root()
+        bower_adapter.install(['jquery'])
         self.finder = BowerFinder()
-
-    def tearDown(self):
-        remove_components_root()
 
     def test_find(self):
         """Test staticfinder find"""
@@ -67,23 +70,21 @@ class BowerFinderCase(TestCase):
         self.assertEqual(len(matched), 1)
 
 
-class BowerFreezeCase(TestCase):
+class BowerFreezeCase(BaseBowerCase):
     """Case for bower freeze"""
 
     def setUp(self):
-        shortcuts.create_components_root()
-        shortcuts.bower_install(['jquery'])
-        shortcuts.bower_install(['backbone'])
-        shortcuts.bower_install(['underscore'])
-        shortcuts.bower_install(['typeahead.js'])
-
-    def tearDown(self):
-        remove_components_root()
+        super(BowerFreezeCase, self).setUp()
+        bower_adapter.create_components_root()
+        bower_adapter.install(['jquery'])
+        bower_adapter.install(['backbone'])
+        bower_adapter.install(['underscore'])
+        bower_adapter.install(['typeahead.js'])
 
     def test_freeze_shortcut(self):
         """Test freeze shortcut"""
         installed = [
-            package.split('#')[0] for package in shortcuts.bower_freeze()
+            package.split('#')[0] for package in bower_adapter.freeze()
         ]
         self.assertListEqual(installed, [
             'backbone', 'jquery',
