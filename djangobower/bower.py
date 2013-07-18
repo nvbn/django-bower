@@ -27,7 +27,7 @@ class BowerAdapter(object):
     def install(self, packages):
         """Install package from bower"""
         proc = subprocess.Popen(
-            ['bower', 'install'] + list(packages),
+            [self._bower_path, 'install'] + list(packages),
             cwd=self._components_root,
         )
         proc.wait()
@@ -47,7 +47,7 @@ class BowerAdapter(object):
     def freeze(self):
         """Yield packages with versions list"""
         proc = subprocess.Popen(
-            ['bower', 'list', '--offline', '--no-color'],
+            [self._bower_path, 'list', '--offline', '--no-color'],
             cwd=conf.COMPONENTS_ROOT,
             stdout=subprocess.PIPE,
         )
