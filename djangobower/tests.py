@@ -2,9 +2,10 @@ from django.core.management import call_command
 from django.test import TestCase
 from django.conf import settings
 from six import StringIO
-from mock import MagicMock, patch
+from mock import MagicMock
 from .finders import BowerFinder
-from .bower import bower_adapter
+from .bower import bower_adapter, BowerAdapter
+from .exceptions import BowerNotInstalled
 from . import conf
 import os
 import shutil
@@ -100,3 +101,24 @@ class BowerFreezeCase(BaseBowerCase):
 
         self.assertIn('BOWER_INSTALLED_APPS', output)
         self.assertIn('backbone', output)
+
+
+class BowerExistsCase(BaseBowerCase):
+    """
+    Test bower exists checker.
+    This case need bower to be installed.
+    """
+
+    def setUp(self):
+        super(BowerExistsCase, self).setUp()
+        bower_adapter.create_components_root()
+
+    def test_if_exists(self):
+        """Test if bower exists"""
+        self.assertTrue(bower_adapter.is_bower_exists())
+
+    def test_if_not_exists(self):
+        """Test if bower not exists"""
+        adapter = BowerAdapter('/not/exists/path', conf.COMPONENTS_ROOT)
+        with self.assertRaises(BowerNotInstalled):
+            adapter.is_bower_exists()
