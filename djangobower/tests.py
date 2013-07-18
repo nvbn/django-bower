@@ -5,6 +5,7 @@ from six import StringIO
 from mock import MagicMock
 from .finders import BowerFinder
 from .bower import bower_adapter, BowerAdapter
+from .exceptions import BowerNotInstalled
 from . import conf
 import os
 import shutil
@@ -111,6 +112,11 @@ class BowerExistsCase(BaseBowerCase):
     def setUp(self):
         super(BowerExistsCase, self).setUp()
         bower_adapter.create_components_root()
+        self._original_exists = bower_adapter.is_bower_exists
+
+    def tearDown(self):
+        super(BowerExistsCase, self).tearDown()
+        bower_adapter.is_bower_exists = self._original_exists
 
     def test_if_exists(self):
         """Test if bower exists"""
@@ -120,3 +126,22 @@ class BowerExistsCase(BaseBowerCase):
         """Test if bower not exists"""
         adapter = BowerAdapter('/not/exists/path', conf.COMPONENTS_ROOT)
         self.assertFalse(adapter.is_bower_exists())
+
+    def _mock_exists_check(self):
+        """Make exists check return false"""
+        bower_adapter.is_bower_exists = MagicMock()
+        bower_adapter.is_bower_exists.return_value = False
+
+    def test_install_if_not_exists(self):
+        """Test install if not exists"""
+        self._mock_exists_check()
+
+        with self.assertRaises(BowerNotInstalled):
+            call_command('bower_install')
+
+    def test_freeze_if_not_exists(self):
+        """Test freeze if not exists"""
+        self._mock_exists_check()
+
+        with self.assertRaises(BowerNotInstalled):
+            call_command('bower_freeze')
