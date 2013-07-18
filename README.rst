@@ -34,6 +34,13 @@ Specifie path to components root (you need to use absolute path):
 
     BOWER_COMPONENTS_ROOT = '/PROJECT_ROOT/components/'
 
+
+If you need, you can manually set path to bower
+
+.. code-block:: python
+
+    BOWER_PATH = '/usr/bin/bower'
+
 You can see example settings file in `example project <https://github.com/nvbn/django-bower/blob/master/example/example/settings.py>`_.
 
 Usage
