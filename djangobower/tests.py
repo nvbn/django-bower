@@ -5,7 +5,6 @@ from six import StringIO
 from mock import MagicMock
 from .finders import BowerFinder
 from .bower import bower_adapter, BowerAdapter
-from .exceptions import BowerNotInstalled
 from . import conf
 import os
 import shutil
@@ -120,5 +119,4 @@ class BowerExistsCase(BaseBowerCase):
     def test_if_not_exists(self):
         """Test if bower not exists"""
         adapter = BowerAdapter('/not/exists/path', conf.COMPONENTS_ROOT)
-        with self.assertRaises(BowerNotInstalled):
-            adapter.is_bower_exists()
+        self.assertFalse(adapter.is_bower_exists())

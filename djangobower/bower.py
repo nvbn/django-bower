@@ -1,4 +1,3 @@
-from .exceptions import BowerNotInstalled
 from . import conf, shortcuts
 import os
 import subprocess
@@ -14,10 +13,11 @@ class BowerAdapter(object):
 
     def is_bower_exists(self):
         """Check is bower exists or raise exception"""
-        if not shortcuts.is_executable(self._bower_path)\
-                and not shortcuts.which(self._bower_path):
-            raise BowerNotInstalled()
-        return True
+        if shortcuts.is_executable(self._bower_path)\
+                or shortcuts.which(self._bower_path):
+            return True
+        else:
+            return False
 
     def create_components_root(self):
         """Create components root if need"""
