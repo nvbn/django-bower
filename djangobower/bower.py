@@ -32,6 +32,18 @@ class BowerAdapter(object):
         )
         proc.wait()
 
+    def _get_package_name(self, line):
+        """Get package name#version from line"""
+        prepared_line = line.decode(
+            sys.getfilesystemencoding(),
+        )
+        if '#' in prepared_line:
+            for part in prepared_line.split(' '):
+                if '#' in part and part:
+                    return part[:-1]
+
+        return False
+
     def freeze(self):
         """Yield packages with versions list"""
         proc = subprocess.Popen(
@@ -41,18 +53,11 @@ class BowerAdapter(object):
         )
         proc.wait()
 
-        yielded = []
+        packages = filter(bool, map(
+            self._get_package_name, proc.stdout.readlines(),
+        ))
 
-        for line in proc.stdout.readlines():
-            prepared_line = line.decode(
-                sys.getfilesystemencoding(),
-            )
-            if '#' in prepared_line:
-                for part in prepared_line.split(' '):
-                    if '#' in part and part not in yielded:
-                        yield part
-                        yielded.append(part)
-                        break
+        return iter(set(packages))
 
 
 bower_adapter = BowerAdapter(conf.BOWER_PATH, conf.COMPONENTS_ROOT)

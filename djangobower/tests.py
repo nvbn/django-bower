@@ -22,6 +22,13 @@ class BaseBowerCase(TestCase):
         if os.path.exists(conf.COMPONENTS_ROOT):
             shutil.rmtree(conf.COMPONENTS_ROOT)
 
+    def assertCountEqual(self, *args, **kwargs):
+        """Add python 2 support"""
+        if hasattr(self, 'assertItemsEqual'):
+            return self.assertItemsEqual(*args, **kwargs)
+        else:
+            return super(BaseBowerCase, self).assertCountEqual(*args, **kwargs)
+
 
 class BowerInstallCase(BaseBowerCase):
     """Test case for bower_install management command"""
@@ -82,15 +89,21 @@ class BowerFreezeCase(BaseBowerCase):
         bower_adapter.install(['underscore'])
         bower_adapter.install(['typeahead.js'])
 
-    def test_freeze_shortcut(self):
-        """Test freeze shortcut"""
+    def test_freeze(self):
+        """Test freeze"""
         installed = [
             package.split('#')[0] for package in bower_adapter.freeze()
         ]
-        self.assertListEqual(installed, [
+        self.assertCountEqual(installed, [
             'backbone', 'jquery',
             'typeahead.js', 'underscore',
         ])
+
+    def test_no_newline_in_freeze(self):
+        """Test no newline in freezee"""
+        installed = bower_adapter.freeze()
+        for package in installed:
+            self.assertNotIn('\n', package)
 
     def test_management_command(self):
         """Test freeze management command"""
