@@ -35,11 +35,8 @@ class BowerAdapter(object):
 
     def _get_package_name(self, line):
         """Get package name#version from line in old bower"""
-        prepared_line = line.decode(
-            sys.getfilesystemencoding(),
-        )
-        if '#' in prepared_line:
-            for part in prepared_line.split(' '):
+        if '#' in line:
+            for part in line.split(' '):
                 if '#' in part and part:
                     return part[:-1]
 
@@ -55,7 +52,7 @@ class BowerAdapter(object):
 
     def _parse_package_names(self, output):
         """Get package names in bower >= 1.0"""
-        data = json.loads(output)
+        data = json.loads(output[:].encode())
         self._packages = []
         self._accumulate_dependencies(data)
         return self._packages
@@ -69,12 +66,15 @@ class BowerAdapter(object):
         )
         proc.wait()
 
-        output = proc.stdout.read().decode("utf-8")
+        output = proc.stdout.read()
 
         try:
             packages = self._parse_package_names(output)
-        except ValueError:
+        except (ValueError, AttributeError):
             # legacy support
+            output = output.decode(
+                sys.getfilesystemencoding(),
+            )
             packages = filter(bool, map(
                 self._get_package_name, output.split('\n'),
             ))
