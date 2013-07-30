@@ -69,7 +69,7 @@ class BowerAdapter(object):
         )
         proc.wait()
 
-        output = proc.stdout.read()
+        output = proc.stdout.read().decode("utf-8")
 
         try:
             packages = self._parse_package_names(output)
