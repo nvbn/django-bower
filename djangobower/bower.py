@@ -41,7 +41,7 @@ class BowerAdapter(object):
         if '#' in prepared_line:
             for part in prepared_line.split(' '):
                 if '#' in part and part:
-                    return part[:-1].encode('ascii', 'ignore')
+                    return part[:-1]
 
         return False
 
