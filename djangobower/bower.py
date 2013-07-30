@@ -1,4 +1,4 @@
-from . import conf, shortcuts
+from . import conf, shortcuts, exceptions
 import os
 import subprocess
 import sys
@@ -33,18 +33,6 @@ class BowerAdapter(object):
         )
         proc.wait()
 
-    def _get_package_name(self, line):
-        """Get package name#version from line in old bower"""
-        prepared_line = line.decode(
-            sys.getfilesystemencoding(),
-        )
-        if '#' in prepared_line:
-            for part in prepared_line.split(' '):
-                if '#' in part and part:
-                    return part[:-1]
-
-        return False
-
     def _accumulate_dependencies(self, data):
         """Accumulate dependencies"""
         for name, params in data['dependencies'].items():
@@ -63,21 +51,20 @@ class BowerAdapter(object):
     def freeze(self):
         """Yield packages with versions list"""
         proc = subprocess.Popen(
-            [self._bower_path, 'list', '-j', '--offline', '--no-color'],
+            [self._bower_path, 'list', '--json', '--offline', '--no-color'],
             cwd=conf.COMPONENTS_ROOT,
             stdout=subprocess.PIPE,
         )
         proc.wait()
 
-        output = proc.stdout.read().decode("utf-8")
+        output = proc.stdout.read().decode(
+            sys.getfilesystemencoding(),
+        )
 
         try:
             packages = self._parse_package_names(output)
         except ValueError:
-            # legacy support
-            packages = filter(bool, map(
-                self._get_package_name, output.split('\n'),
-            ))
+            raise exceptions.LegacyBowerVersionNotSupported()
 
         return iter(set(packages))
 
