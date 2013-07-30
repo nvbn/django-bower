@@ -2,6 +2,7 @@ from . import conf, shortcuts
 import os
 import subprocess
 import sys
+import json
 
 
 class BowerAdapter(object):
@@ -33,7 +34,7 @@ class BowerAdapter(object):
         proc.wait()
 
     def _get_package_name(self, line):
-        """Get package name#version from line"""
+        """Get package name#version from line in old bower"""
         prepared_line = line.decode(
             sys.getfilesystemencoding(),
         )
@@ -44,18 +45,39 @@ class BowerAdapter(object):
 
         return False
 
+    def _accumulate_dependencies(self, data):
+        """Accumulate dependencies"""
+        for name, params in data['dependencies'].items():
+            self._packages.append('{}#{}'.format(
+                name, params.get('pkgMeta', {}).get('version', ''),
+            ))
+            self._accumulate_dependencies(params)
+
+    def _parse_package_names(self, output):
+        """Get package names in bower >= 1.0"""
+        data = json.loads(output)
+        self._packages = []
+        self._accumulate_dependencies(data)
+        return self._packages
+
     def freeze(self):
         """Yield packages with versions list"""
         proc = subprocess.Popen(
-            [self._bower_path, 'list', '--offline', '--no-color'],
+            [self._bower_path, 'list', '-j', '--offline', '--no-color'],
             cwd=conf.COMPONENTS_ROOT,
             stdout=subprocess.PIPE,
         )
         proc.wait()
 
-        packages = filter(bool, map(
-            self._get_package_name, proc.stdout.readlines(),
-        ))
+        output = proc.stdout.read().decode("utf-8")
+
+        try:
+            packages = self._parse_package_names(output)
+        except ValueError:
+            # legacy support
+            packages = filter(bool, map(
+                self._get_package_name, output.split('\n'),
+            ))
 
         return iter(set(packages))
 
