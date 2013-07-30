@@ -6,9 +6,7 @@ setup(
     name='django-bower',
     version=version,
     description="Integrate django with bower",
-    long_description="""\
-    Easy way to use bower with your django project
-""",
+    long_description=open('README.rst').read(),
     classifiers=[
         'Framework :: Django',
         'Programming Language :: JavaScript',
