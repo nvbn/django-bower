@@ -8,6 +8,12 @@ For running tests you need to install `django-bower` in development mode with:
 
     python setup.py develop
 
+Install dev requirements:
+
+.. code-block:: bash
+
+    pip install -r requirements_dev.txt
+
 Now you can run tests with:
 
 .. code-block:: bash
