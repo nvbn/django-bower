@@ -2,7 +2,7 @@ Version 4.6 (2013-08-11)
 ======================================================
 
 * Add bower 1.1 support.
-* Use discover test runner.
+* Add django 1.6 support.
 * Remove dev dependencies from setup.py.
 
 Version 4.5 (2013-07-30)
