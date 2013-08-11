@@ -1,5 +1,5 @@
 import os
-import django
+
 
 TEST_PROJECT_ROOT = os.path.abspath(
     os.environ.get('TEST_PROJECT_ROOT', '/tmp/'),
@@ -18,9 +18,9 @@ BOWER_INSTALLED_APPS = (
 
 SECRET_KEY = 'iamdjangobower'
 
-INSTALLED_APPS = [
+INSTALLED_APPS = (
     'djangobower',
-]
+)
 
 DATABASES = {
     'default': {
@@ -32,7 +32,3 @@ DATABASES = {
         'PORT': '',
     }
 }
-
-if django.VERSION[0] == 1 and django.VERSION[1] < 6:
-    INSTALLED_APPS.append('discover_runner')
-    TEST_RUNNER = 'discover_runner.DiscoverRunner'

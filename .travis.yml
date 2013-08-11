@@ -7,7 +7,6 @@ install:
   - pip install -U . --use-mirrors
   - pip install -U -r requirements_dev.txt --use-mirrors
 script:
-  - bash
   - mkdir /home/travis/test_root/ -p
   - export TEST_PROJECT_ROOT=/home/travis/test_root/
   - export DJANGO_SETTINGS_MODULE=djangobower.test_settings
