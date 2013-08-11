@@ -18,6 +18,7 @@ BOWER_INSTALLED_APPS = (
 SECRET_KEY = 'iamdjangobower'
 
 INSTALLED_APPS = (
+    'discover_runner',
     'djangobower',
 )
 
@@ -31,3 +32,5 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+TEST_RUNNER = 'discover_runner.DiscoverRunner'
