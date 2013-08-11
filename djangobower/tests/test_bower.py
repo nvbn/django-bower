@@ -1,33 +1,12 @@
 from django.core.management import call_command
-from django.test import TestCase
 from django.conf import settings
 from six import StringIO
 from mock import MagicMock
-from .finders import BowerFinder
-from .bower import bower_adapter, BowerAdapter
-from .exceptions import BowerNotInstalled
-from . import conf
+from ..bower import bower_adapter, BowerAdapter
+from ..exceptions import BowerNotInstalled
+from .. import conf
+from .base import BaseBowerCase
 import os
-import shutil
-
-
-class BaseBowerCase(TestCase):
-    """Base bower test case"""
-
-    def tearDown(self):
-        self._remove_components_root()
-
-    def _remove_components_root(self):
-        """Remove components root if exists"""
-        if os.path.exists(conf.COMPONENTS_ROOT):
-            shutil.rmtree(conf.COMPONENTS_ROOT)
-
-    def assertCountEqual(self, *args, **kwargs):
-        """Add python 2 support"""
-        if hasattr(self, 'assertItemsEqual'):
-            return self.assertItemsEqual(*args, **kwargs)
-        else:
-            return super(BaseBowerCase, self).assertCountEqual(*args, **kwargs)
 
 
 class BowerInstallCase(BaseBowerCase):
@@ -35,8 +14,13 @@ class BowerInstallCase(BaseBowerCase):
 
     def setUp(self):
         super(BowerInstallCase, self).setUp()
-        bower_adapter.install = MagicMock()
         self.apps = settings.BOWER_INSTALLED_APPS
+        self._original_install = bower_adapter.install
+        bower_adapter.install = MagicMock()
+
+    def tearDown(self):
+        super(BowerInstallCase, self).tearDown()
+        bower_adapter.install = self._original_install
 
     def test_create_components_root(self):
         """Test create components root"""
@@ -53,37 +37,11 @@ class BowerInstallCase(BaseBowerCase):
         )
 
 
-class BowerFinderCase(BaseBowerCase):
-    """Test finding installed with bower files"""
-
-    def setUp(self):
-        super(BowerFinderCase, self).setUp()
-        bower_adapter.create_components_root()
-        bower_adapter.install(['jquery'])
-        self.finder = BowerFinder()
-
-    def test_find(self):
-        """Test staticfinder find"""
-        path = self.finder.find('jquery/jquery.min.js')
-        self.assertEqual(path, os.path.join(
-            conf.COMPONENTS_ROOT, 'bower_components', 'jquery/jquery.min.js',
-        ))
-
-    def test_list(self):
-        """Test staticfinder list"""
-        result = self.finder.list([])
-        matched = [
-            part for part in result if part[0] == 'jquery/jquery.min.js'
-        ]
-        self.assertEqual(len(matched), 1)
-
-
 class BowerFreezeCase(BaseBowerCase):
     """Case for bower freeze"""
 
     def setUp(self):
         super(BowerFreezeCase, self).setUp()
-        bower_adapter.create_components_root()
         bower_adapter.install(['jquery'])
         bower_adapter.install(['backbone'])
         bower_adapter.install(['underscore'])
@@ -124,7 +82,6 @@ class BowerExistsCase(BaseBowerCase):
 
     def setUp(self):
         super(BowerExistsCase, self).setUp()
-        bower_adapter.create_components_root()
         self._original_exists = bower_adapter.is_bower_exists
 
     def tearDown(self):
