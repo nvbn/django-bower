@@ -5,7 +5,7 @@ python:
 install:
   - npm install -g bower
   - pip install -U . --use-mirrors
-  - pip install -r -U requirements_dev.txt --use-mirrors
+  - pip install -U -r requirements_dev.txt --use-mirrors
 script:
   - mkdir /home/travis/test_root/ -p
   - export TEST_PROJECT_ROOT=/home/travis/test_root/
