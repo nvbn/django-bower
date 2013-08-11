@@ -18,7 +18,7 @@ setup(
     author_email='nvbn.rm@gmail.com',
     url='https://github.com/nvbn/django-bower',
     license='BSD',
-    packages=find_packages(exclude=['ez_setup', 'example', 'tests']),
+    packages=find_packages(exclude=['example']),
     include_package_data=True,
     zip_safe=True,
     install_requires=[

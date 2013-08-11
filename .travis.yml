@@ -4,9 +4,10 @@ python:
   - "3.3"
 install:
   - npm install -g bower
-  - pip install . --use-mirrors
-  - pip install -r requirements_dev.txt --use-mirrors
+  - pip install -U . --use-mirrors
+  - pip install -r -U requirements_dev.txt --use-mirrors
 script:
   - mkdir /home/travis/test_root/ -p
   - export TEST_PROJECT_ROOT=/home/travis/test_root/
-  - django-admin.py test --settings=djangobower.test_settings djangobower
+  - export DJANGO_SETTINGS_MODULE=djangobower.test_settings
+  - django-admin.py test djangobower
