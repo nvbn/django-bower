@@ -42,7 +42,7 @@ class BowerFreezeCase(BaseBowerCase):
 
     def setUp(self):
         super(BowerFreezeCase, self).setUp()
-        bower_adapter.install(['jquery'])
+        bower_adapter.install(['jquery#1.9'])
         bower_adapter.install(['backbone'])
         bower_adapter.install(['underscore'])
         bower_adapter.install(['typeahead.js'])

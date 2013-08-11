@@ -12,7 +12,7 @@ STATIC_ROOT = os.path.join(TEST_PROJECT_ROOT, 'bower_static')
 STATIC_URL = '/static/'
 
 BOWER_INSTALLED_APPS = (
-    'jquery',
+    'jquery#1.9',
     'underscore',
 )
 

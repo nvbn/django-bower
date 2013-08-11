@@ -10,7 +10,7 @@ class BowerFinderCase(BaseBowerCase):
 
     def setUp(self):
         super(BowerFinderCase, self).setUp()
-        bower_adapter.install(['jquery'])
+        bower_adapter.install(['jquery#1.9'])
         self.finder = BowerFinder()
 
     def test_find(self):
