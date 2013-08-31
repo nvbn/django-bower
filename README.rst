@@ -1,6 +1,17 @@
 Django-bower
 ============
 
+.. image:: https://travis-ci.org/nvbn/django-bower.png
+   :alt: Build Status
+   :target: https://travis-ci.org/nvbn/django-bower
+.. image:: https://coveralls.io/repos/nvbn/django-bower/badge.png?branch=develop
+   :alt: Coverage Status
+   :target: https://coveralls.io/repos/nvbn/django-bower
+.. image:: https://pypip.in/v/django-bower/badge.png
+   :target: https://crate.io/packages/django-bower/
+.. image:: https://pypip.in/d/django-bower/badge.png
+   :target: https://crate.io/packages/django-bower/
+
 Easy way to use `bower <http://bower.io/>`_ with your `django <https://www.djangoproject.com/>`_ project.
 
 Bower is a package manager for the web. It offers a generic, unopinionated solution to the problem of front-end package management, while exposing the package dependency model via an API that can be consumed by a more opinionated build stack. There are no system wide dependencies, no dependencies are shared between different apps, and the dependency tree is flat.
