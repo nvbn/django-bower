@@ -11,6 +11,6 @@ script:
   - export TEST_PROJECT_ROOT=/home/travis/test_root/
   - coverage run runtests.py test djangobower
 after_success:
-  - coverage report
+  - coverage report --include="djangobower*"
   - pip install --quiet python-coveralls
   - coveralls
