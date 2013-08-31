@@ -4,13 +4,13 @@ python:
   - "3.3"
 install:
   - npm install -g bower
-  - pip install -U . --use-mirrors
-  - pip install -U -r requirements_dev.txt --use-mirrors
+  - pip install -U .
+  - pip install -U -r requirements_dev.txt
 script:
   - mkdir /home/travis/test_root/ -p
   - export TEST_PROJECT_ROOT=/home/travis/test_root/
   - coverage run runtests.py test djangobower
 after_success:
   - coverage report
-  - pip install --quiet --use-mirrors python-coveralls
+  - pip install --quiet python-coveralls
   - coveralls
