@@ -101,17 +101,3 @@ class BowerExistsCase(BaseBowerCase):
         """Make exists check return false"""
         bower_adapter.is_bower_exists = MagicMock()
         bower_adapter.is_bower_exists.return_value = False
-
-    def test_install_if_not_exists(self):
-        """Test install if not exists"""
-        self._mock_exists_check()
-
-        with self.assertRaises(BowerNotInstalled):
-            call_command('bower_install')
-
-    def test_freeze_if_not_exists(self):
-        """Test freeze if not exists"""
-        self._mock_exists_check()
-
-        with self.assertRaises(BowerNotInstalled):
-            call_command('bower_freeze')

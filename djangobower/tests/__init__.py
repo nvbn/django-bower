@@ -1,1 +1,2 @@
-from . import test_bower, test_finders
+from .test_bower import *
+from .test_finders import *
