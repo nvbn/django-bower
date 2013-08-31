@@ -9,5 +9,8 @@ install:
 script:
   - mkdir /home/travis/test_root/ -p
   - export TEST_PROJECT_ROOT=/home/travis/test_root/
-  - export DJANGO_SETTINGS_MODULE=djangobower.test_settings
-  - django-admin.py test djangobower
+  - coverage run runtests.py test djangobower
+after_success:
+  - coverage report
+  - pip install --quiet --use-mirrors python-coveralls
+  - coveralls
