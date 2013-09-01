@@ -6,7 +6,7 @@ Django-bower
    :target: https://travis-ci.org/nvbn/django-bower
 .. image:: https://coveralls.io/repos/nvbn/django-bower/badge.png?branch=develop
    :alt: Coverage Status
-   :target: https://coveralls.io/repos/nvbn/django-bower
+   :target: https://coveralls.io/r/nvbn/django-bower
 .. image:: https://pypip.in/v/django-bower/badge.png
    :target: https://crate.io/packages/django-bower/
 .. image:: https://pypip.in/d/django-bower/badge.png
