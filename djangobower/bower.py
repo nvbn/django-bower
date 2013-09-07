@@ -36,9 +36,17 @@ class BowerAdapter(object):
     def _accumulate_dependencies(self, data):
         """Accumulate dependencies"""
         for name, params in data['dependencies'].items():
-            self._packages.append('{}#{}'.format(
-                name, params.get('pkgMeta', {}).get('version', ''),
-            ))
+            meta = params.get('pkgMeta', {})
+            version = meta.get(
+                'version', meta.get('_resolution', {}).get('commit', ''),
+            )
+
+            if version:
+                full_name = '{}#{}'.format(name, version)
+            else:
+                full_name = name
+
+            self._packages.append(full_name)
             self._accumulate_dependencies(params)
 
     def _parse_package_names(self, output):

@@ -46,6 +46,7 @@ class BowerFreezeCase(BaseBowerCase):
         bower_adapter.install(['backbone'])
         bower_adapter.install(['underscore'])
         bower_adapter.install(['typeahead.js'])
+        bower_adapter.install(['backbone-tastypie'])
 
     def test_freeze(self):
         """Test freeze"""
@@ -55,6 +56,7 @@ class BowerFreezeCase(BaseBowerCase):
         self.assertCountEqual(installed, [
             'backbone', 'jquery',
             'typeahead.js', 'underscore',
+            'backbone-tastypie',
         ])
 
     def test_no_newline_in_freeze(self):
