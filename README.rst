@@ -11,7 +11,7 @@ Django-bower
    :target: https://crate.io/packages/django-bower/
 .. image:: https://pypip.in/d/django-bower/badge.png
    :target: https://crate.io/packages/django-bower/
-.. image:: https://goo.gl/Cp4t39
+.. image:: https://goo.gl/1A23NR
    :target: http://coviolations.io/projects/nvbn/django-bower/
 
 Easy way to use `bower <http://bower.io/>`_ with your `django <https://www.djangoproject.com/>`_ project.
