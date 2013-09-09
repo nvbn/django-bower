@@ -96,4 +96,4 @@ You can use `bower_freeze` to receive `BOWER_INSTALLED_APPS` with fixed current 
 
 Python 3 support
 ----------------
-django-bower support python 3.3+
+django-bower supports python 3.3+
