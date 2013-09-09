@@ -9,7 +9,8 @@ install:
   - npm install -g bower
   - pip install -U .
   - pip install -U -r requirements_dev.txt
-  - pip install pep8 coviolations_app
+  - pip install pep8
+  - pip install coviolations_app||echo
 script:
   - mkdir /home/travis/test_root/ -p
   - export TEST_PROJECT_ROOT=/home/travis/test_root/
@@ -18,4 +19,4 @@ after_success:
   - coverage report
   - pip install --quiet python-coveralls
   - coveralls
-  - covio
+  - covio||echo
