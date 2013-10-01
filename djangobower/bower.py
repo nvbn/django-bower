@@ -25,10 +25,10 @@ class BowerAdapter(object):
         if not os.path.exists(self._components_root):
             os.mkdir(self._components_root)
 
-    def install(self, packages):
+    def install(self, packages, *options):
         """Install package from bower"""
         proc = subprocess.Popen(
-            [self._bower_path, 'install'] + list(packages),
+            [self._bower_path, 'install'] + list(options) + list(packages),
             cwd=self._components_root,
         )
         proc.wait()

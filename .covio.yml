@@ -2,4 +2,3 @@ violations:
   pep8: pep8 . --exclude='*migrations*,*settings*,*components*,*docs*'
   sloccount: sloccount .
   py_unittest: cat test_out
-project: 'nvbn/django-bower'

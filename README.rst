@@ -11,7 +11,7 @@ Django-bower
    :target: https://crate.io/packages/django-bower/
 .. image:: https://pypip.in/d/django-bower/badge.png
    :target: https://crate.io/packages/django-bower/
-.. image:: https://goo.gl/Cp4t39
+.. image:: https://goo.gl/1A23NR
    :target: http://coviolations.io/projects/nvbn/django-bower/
 
 Easy way to use `bower <http://bower.io/>`_ with your `django <https://www.djangoproject.com/>`_ project.
@@ -96,4 +96,4 @@ You can use `bower_freeze` to receive `BOWER_INSTALLED_APPS` with fixed current 
 
 Python 3 support
 ----------------
-django-bower support python 3.3+
+django-bower supports python 3.3+
