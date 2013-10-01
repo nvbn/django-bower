@@ -31,6 +31,12 @@ In production you need to call `bower_install` before `collectstatic`:
     ./manage.py bower_install
     ./manage.py collectstatic
 
+If you need to pass arguments to bower, like `--allow-root`, use:
+
+.. code-block:: bash
+
+    ./manage.py bower_install -- --allow-root
+
 You can use `bower_freeze` to receive `BOWER_INSTALLED_APPS` with fixed current versions:
 
 .. code-block:: bash
