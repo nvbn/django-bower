@@ -8,4 +8,4 @@ class Command(BaseBowerCommand):
 
     def handle(self, *args, **options):
         super(Command, self).handle(*args, **options)
-        bower_adapter.install(settings.BOWER_INSTALLED_APPS)
+        bower_adapter.install(settings.BOWER_INSTALLED_APPS, *args)
