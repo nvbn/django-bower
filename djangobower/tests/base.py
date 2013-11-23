@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.test import TestCase
 from django.test.utils import override_settings
 from ..bower import bower_adapter
@@ -5,7 +6,12 @@ import os
 import shutil
 
 
-TEST_COMPONENTS_ROOT = '/tmp/bower_components/'
+try:
+    TEST_COMPONENTS_ROOT = os.path.join(
+        settings.TEST_PROJECT_ROOT, 'bower_components',
+    )
+except AttributeError:
+    TEST_COMPONENTS_ROOT = '/tmp/bower_components/'
 
 
 @override_settings(BOWER_COMPONENTS_ROOT=TEST_COMPONENTS_ROOT)
