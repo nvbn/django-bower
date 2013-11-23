@@ -3,9 +3,8 @@ from django.conf import settings
 from six import StringIO
 from mock import MagicMock
 from ..bower import bower_adapter, BowerAdapter
-from ..exceptions import BowerNotInstalled
 from .. import conf
-from .base import BaseBowerCase
+from .base import BaseBowerCase, TEST_COMPONENTS_ROOT
 import os
 
 
@@ -27,7 +26,7 @@ class BowerInstallCase(BaseBowerCase):
         self._remove_components_root()
         call_command('bower_install')
 
-        self.assertTrue(os.path.exists(conf.COMPONENTS_ROOT))
+        self.assertTrue(os.path.exists(TEST_COMPONENTS_ROOT))
 
     def test_install(self):
         """Test install bower packages"""
@@ -96,7 +95,7 @@ class BowerExistsCase(BaseBowerCase):
 
     def test_if_not_exists(self):
         """Test if bower not exists"""
-        adapter = BowerAdapter('/not/exists/path', conf.COMPONENTS_ROOT)
+        adapter = BowerAdapter('/not/exists/path', TEST_COMPONENTS_ROOT)
         self.assertFalse(adapter.is_bower_exists())
 
     def _mock_exists_check(self):

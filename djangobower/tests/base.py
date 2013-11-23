@@ -1,10 +1,14 @@
 from django.test import TestCase
+from django.test.utils import override_settings
 from ..bower import bower_adapter
-from .. import conf
 import os
 import shutil
 
 
+TEST_COMPONENTS_ROOT = '/tmp/bower_components/'
+
+
+@override_settings(BOWER_COMPONENTS_ROOT=TEST_COMPONENTS_ROOT)
 class BaseBowerCase(TestCase):
     """Base bower test case"""
 
@@ -16,8 +20,8 @@ class BaseBowerCase(TestCase):
 
     def _remove_components_root(self):
         """Remove components root if exists"""
-        if os.path.exists(conf.COMPONENTS_ROOT):
-            shutil.rmtree(conf.COMPONENTS_ROOT)
+        if os.path.exists(TEST_COMPONENTS_ROOT):
+            shutil.rmtree(TEST_COMPONENTS_ROOT)
 
     def assertCountEqual(self, *args, **kwargs):
         """Add python 2 support"""
