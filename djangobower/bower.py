@@ -25,13 +25,17 @@ class BowerAdapter(object):
         if not os.path.exists(self._components_root):
             os.mkdir(self._components_root)
 
-    def install(self, packages, *options):
-        """Install package from bower"""
+    def call_bower(self, *args):
+        """Call bower with a list of args"""
         proc = subprocess.Popen(
-            [self._bower_path, 'install'] + list(options) + list(packages),
+            [self._bower_path] + list(args),
             cwd=self._components_root,
         )
         proc.wait()
+
+    def install(self, packages, *options):
+        """Install packages from bower"""
+        self.call_bower(['install'] + list(options) + list(packages))
 
     def _accumulate_dependencies(self, data):
         """Accumulate dependencies"""
