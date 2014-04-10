@@ -85,20 +85,27 @@ In production you need to call `bower_install` before `collectstatic`:
 
 .. code-block:: bash
 
-    ./manage.py bower_install
+    ./manage.py bower install
     ./manage.py collectstatic
 
 If you need to pass arguments to bower, like `--allow-root`, use:
 
 .. code-block:: bash
 
-    ./manage.py bower_install -- --allow-root
+    ./manage.py bower install -- --allow-root
 
-You can use `bower_freeze` to receive `BOWER_INSTALLED_APPS` with fixed current versions:
+You can use `bower freeze` to receive `BOWER_INSTALLED_APPS` with fixed current versions:
 
 .. code-block:: bash
 
-    ./manage.py bower_freeze
+    ./manage.py bower freeze
+
+You can call bower commands like `info` and `update` with:
+
+.. code-block:: bash
+
+    ./manage.py bower info backbone
+    ./manage.py bower update
 
 Python 3 support
 ----------------
