@@ -32,7 +32,7 @@ class BowerInstallCase(BaseBowerCase):
         """Test install bower packages"""
         call_command('bower_install')
         bower_adapter.install.assert_called_once_with(
-            self.apps,
+            self.apps, tuple(),
         )
 
 
@@ -102,3 +102,52 @@ class BowerExistsCase(BaseBowerCase):
         """Make exists check return false"""
         bower_adapter.is_bower_exists = MagicMock()
         bower_adapter.is_bower_exists.return_value = False
+
+
+class BowerCommandCase(BaseBowerCase):
+    """Test case for ./manage.py bower something command"""
+
+    def setUp(self):
+        super(BowerCommandCase, self).setUp()
+        self.apps = settings.BOWER_INSTALLED_APPS
+        self._mock_bower_adapter()
+
+    def _mock_bower_adapter(self):
+        self._original_install = bower_adapter.install
+        bower_adapter.install = MagicMock()
+        self._orig_call = bower_adapter.call_bower
+        bower_adapter.call_bower = MagicMock()
+        self._orig_freeze = bower_adapter.freeze
+        bower_adapter.freeze = MagicMock()
+
+    def tearDown(self):
+        super(BowerCommandCase, self).tearDown()
+        bower_adapter.install = self._original_install
+        bower_adapter.call_bower = self._orig_call
+        bower_adapter.freeze = self._orig_freeze
+
+    def test_install_without_params(self):
+        """Test that bower install without param identical
+        with bower_install
+
+        """
+        call_command('bower', 'install')
+        bower_adapter.install.assert_called_once_with(
+            self.apps, [])
+
+    def test_install_with_params(self):
+        """Test bower install <something>"""
+        call_command('bower', 'install', 'jquery')
+        bower_adapter.call_bower.assert_called_once_with(
+            ('install', 'jquery'))
+
+    def test_freeze(self):
+        """Test bower freeze command"""
+        call_command('bower', 'freeze')
+        bower_adapter.freeze.assert_called_once_with()
+
+    def test_call_to_bower(self):
+        """Test simple call to bower"""
+        call_command('bower', 'update')
+        bower_adapter.call_bower.assert_called_once_with(
+            ('update',))

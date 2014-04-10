@@ -29,8 +29,7 @@ class BowerAdapter(object):
         """Call bower with a list of args"""
         proc = subprocess.Popen(
             [self._bower_path] + list(args),
-            cwd=self._components_root,
-        )
+            cwd=self._components_root)
         proc.wait()
 
     def install(self, packages, *options):
