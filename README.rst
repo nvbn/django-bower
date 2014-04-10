@@ -72,7 +72,7 @@ Download bower packages with management command:
 
 .. code-block:: bash
 
-    ./manage.py bower_install
+    ./manage.py bower install
 
 Add scripts in template, like:
 
@@ -81,7 +81,7 @@ Add scripts in template, like:
     {% load static %}
     <script type="text/javascript" src='{% static 'jquery/jquery.js' %}'></script>
 
-In production you need to call `bower_install` before `collectstatic`:
+In production you need to call `bower install` before `collectstatic`:
 
 .. code-block:: bash
 
