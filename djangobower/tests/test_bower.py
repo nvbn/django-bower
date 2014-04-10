@@ -31,9 +31,7 @@ class BowerInstallCase(BaseBowerCase):
     def test_install(self):
         """Test install bower packages"""
         call_command('bower_install')
-        bower_adapter.install.assert_called_once_with(
-            self.apps, tuple(),
-        )
+        bower_adapter.install.assert_called_once_with(self.apps)
 
 
 class BowerFreezeCase(BaseBowerCase):
@@ -133,7 +131,7 @@ class BowerCommandCase(BaseBowerCase):
         """
         call_command('bower', 'install')
         bower_adapter.install.assert_called_once_with(
-            self.apps, [])
+            self.apps)
 
     def test_install_with_params(self):
         """Test bower install <something>"""
