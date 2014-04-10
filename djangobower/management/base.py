@@ -18,7 +18,7 @@ class BaseBowerCommand(BaseCommand):
             raise BowerNotInstalled()
 
     def _install(self, args):
-        bower_adapter.install(settings.BOWER_INSTALLED_APPS, args)
+        bower_adapter.install(settings.BOWER_INSTALLED_APPS, *args)
 
     def _freeze(self):
         packages = tuple(bower_adapter.freeze())
