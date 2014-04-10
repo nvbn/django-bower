@@ -25,7 +25,7 @@ class BowerAdapter(object):
         if not os.path.exists(self._components_root):
             os.mkdir(self._components_root)
 
-    def call_bower(self, *args):
+    def call_bower(self, args):
         """Call bower with a list of args"""
         proc = subprocess.Popen(
             [self._bower_path] + list(args),
