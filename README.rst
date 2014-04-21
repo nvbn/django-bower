@@ -14,7 +14,7 @@ Django-bower
 .. image:: https://goo.gl/1A23NR
    :target: http://coviolations.io/projects/nvbn/django-bower/
 
-Easy way to use `bower <http://bower.io/>`_ with your `django <https://www.djangoproject.com/>`_ project.
+Easy way to use `bower <http://bower.io/>`_ with your `Django <https://www.djangoproject.com/>`_ project.
 
 Bower is a package manager for the web. It offers a generic, unopinionated solution to the problem of front-end package management, while exposing the package dependency model via an API that can be consumed by a more opinionated build stack. There are no system wide dependencies, no dependencies are shared between different apps, and the dependency tree is flat.
 
@@ -41,25 +41,25 @@ Add staticfinder to `STATICFILES_FINDERS`:
 
     'djangobower.finders.BowerFinder',
 
-Specifie path to components root (you need to use absolute path):
+Specify path to components root (you need to use an absolute path):
 
 .. code-block:: python
 
     BOWER_COMPONENTS_ROOT = '/PROJECT_ROOT/components/'
 
 
-If you need, you can manually set path to bower
+If you need, you can manually set the path to bower:
 
 .. code-block:: python
 
     BOWER_PATH = '/usr/bin/bower'
 
-You can see example settings file in `example project <https://github.com/nvbn/django-bower/blob/master/example/example/settings.py>`_.
+You can see an example settings file in `example project <https://github.com/nvbn/django-bower/blob/master/example/example/settings.py>`_.
 
 Usage
 -----
 
-Specifie `BOWER_INSTALLED_APPS` in settings, like:
+Specify `BOWER_INSTALLED_APPS` in settings, like:
 
 .. code-block:: python
 
@@ -68,13 +68,13 @@ Specifie `BOWER_INSTALLED_APPS` in settings, like:
         'underscore',
     )
 
-Download bower packages with management command:
+Download bower packages with the management command:
 
 .. code-block:: bash
 
     ./manage.py bower install
 
-Add scripts in template, like:
+Add scripts in the template, like:
 
 .. code-block:: html+django
 
