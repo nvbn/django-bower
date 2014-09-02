@@ -2,7 +2,7 @@ import os, sys
 
 from django.conf import settings
 
-COMPONENTS_ROOT = getattr(settings, 'BOWER_COMPONENTS_ROOT')
+COMPONENTS_ROOT = getattr(settings, 'BOWER_COMPONENTS_ROOT', 'bower_components')
 
 BOWER_PATH_DEFAULT = 'bower'
 if sys.platform == 'win32':
