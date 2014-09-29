@@ -45,7 +45,7 @@ class BowerAdapter(object):
             )
 
             if version:
-                full_name = '{}#{}'.format(name, version)
+                full_name = '{0}#{1}'.format(name, version)
             else:
                 full_name = name
 
