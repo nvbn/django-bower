@@ -22,7 +22,7 @@ class BaseBowerCommand(BaseCommand):
 
     def _freeze(self):
         packages = tuple(bower_adapter.freeze())
-        output = 'BOWER_INSTALLED_APPS = {}'.format(
+        output = 'BOWER_INSTALLED_APPS = {0}'.format(
             pformat(packages),
         )
         self.stdout.write(output)

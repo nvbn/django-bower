@@ -3,7 +3,7 @@ from ..base import BaseBowerCommand
 
 
 class Command(BaseBowerCommand):
-    help = 'Call bower in components root ({}).'.format(
+    help = 'Call bower in components root ({0}).'.format(
         bower_adapter._components_root)
 
     def handle(self, *args, **options):

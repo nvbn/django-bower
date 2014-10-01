@@ -1,9 +1,12 @@
 import os
 
 
+
 TEST_PROJECT_ROOT = os.path.abspath(
     os.environ.get('TEST_PROJECT_ROOT', '/tmp/'),
 )
+
+BASE_DIR = TEST_PROJECT_ROOT
 
 BOWER_COMPONENTS_ROOT = os.path.join(TEST_PROJECT_ROOT, 'bower_components')
 
