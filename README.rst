@@ -79,7 +79,7 @@ Add scripts in the template, like:
 .. code-block:: html+django
 
     {% load static %}
-    <script type="text/javascript" src='{% static 'jquery/jquery.js' %}'></script>
+    <script type="text/javascript" src='{% static 'jquery/dist/jquery.js' %}'></script>
 
 In production you need to call `bower install` before `collectstatic`:
 
