@@ -1,6 +1,6 @@
+import collections
 from django.contrib.staticfiles.finders import FileSystemFinder
 from django.core.files.storage import FileSystemStorage
-from django.utils.datastructures import SortedDict
 from . import conf
 import os
 
@@ -12,7 +12,7 @@ class BowerFinder(FileSystemFinder):
         self.locations = [
             ('', self._get_bower_components_location()),
         ]
-        self.storages = SortedDict()
+        self.storages = collections.OrderedDict()
 
         filesystem_storage = FileSystemStorage(location=self.locations[0][1])
         filesystem_storage.prefix = self.locations[0][0]
