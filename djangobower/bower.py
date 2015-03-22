@@ -66,11 +66,8 @@ class BowerAdapter(object):
             cwd=conf.COMPONENTS_ROOT,
             stdout=subprocess.PIPE,
         )
-        proc.wait()
-
-        output = proc.stdout.read().decode(
-            sys.getfilesystemencoding(),
-        )
+        outs, errs = proc.communicate()
+        output = outs.decode(sys.getfilesystemencoding())
 
         try:
             packages = self._parse_package_names(output)
