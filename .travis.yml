@@ -13,8 +13,8 @@ before_install:
 install:
   - npm install -g bower
   - pip install -q "Django>=${DJANGO_VERSION},<${DJANGO_VERSION}.99"
-  - pip install -U .
-  - pip install -U -r requirements_dev.txt
+  - pip install .
+  - pip install -r requirements_dev.txt
   - pip install pep8
   - pip install coviolations_app
 script:
