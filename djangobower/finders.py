@@ -12,7 +12,11 @@ class BowerFinder(FileSystemFinder):
         self.locations = [
             ('', self._get_bower_components_location()),
         ]
-        self.storages = collections.OrderedDict()
+        try:
+            self.storages = collections.OrderedDict()
+        except AttributeError:
+            from ordereddict import OrderedDict
+            self.storages = OrderedDict()
 
         filesystem_storage = FileSystemStorage(location=self.locations[0][1])
         filesystem_storage.prefix = self.locations[0][0]
