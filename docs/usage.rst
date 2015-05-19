@@ -2,7 +2,7 @@
 Usage
 *****
 
-Specifie `BOWER_INSTALLED_APPS` in settings, like:
+Specify `BOWER_INSTALLED_APPS` in settings, like:
 
 .. code-block:: python
 
