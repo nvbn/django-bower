@@ -13,20 +13,25 @@ class BowerFinder(FileSystemFinder):
     """Find static files installed with bower"""
 
     def __init__(self, apps=None, *args, **kwargs):
-        self.locations = [
-            ('', self._get_bower_components_location()),
-        ]
+        self.locations = []
         self.storages = OrderedDict()
 
-        filesystem_storage = FileSystemStorage(location=self.locations[0][1])
-        filesystem_storage.prefix = self.locations[0][0]
-        self.storages[self.locations[0][1]] = filesystem_storage
+        root = self._get_bower_components_location()
+        if root is not None:
+            prefix = ''
+            self.locations.append((prefix, root))
+
+            filesystem_storage = FileSystemStorage(location=root)
+            filesystem_storage.prefix = prefix
+            self.storages[root] = filesystem_storage
 
     def _get_bower_components_location(self):
-        """Get bower components location"""
-        path = os.path.join(conf.COMPONENTS_ROOT, 'bower_components')
-
-        # for old bower versions:
-        if not os.path.exists(path):
-            path = os.path.join(conf.COMPONENTS_ROOT, 'components')
-        return path
+        """
+        Return the bower components location, or None if one does not exist.
+        """
+        # Bower 0.10 changed the default folder from 'components' to 'bower_components'.
+        # Try 'bower_components' first, then fall back to trying 'components'.
+        for name in ['bower_components', 'components']:
+            path = os.path.join(conf.COMPONENTS_ROOT, name)
+            if os.path.exists(path):
+                return path
