@@ -23,7 +23,7 @@ class BowerAdapter(object):
     def create_components_root(self):
         """Create components root if need"""
         if not os.path.exists(self._components_root):
-            os.mkdir(self._components_root)
+            os.makedirs(self._components_root)
 
     def call_bower(self, args):
         """Call bower with a list of args"""

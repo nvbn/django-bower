@@ -1,11 +1,33 @@
 from django.core.management import call_command
 from django.conf import settings
+from django.test import TestCase
 from six import StringIO
 from mock import MagicMock
 from ..bower import bower_adapter, BowerAdapter
 from .. import conf
 from .base import BaseBowerCase, TEST_COMPONENTS_ROOT
 import os
+import shutil
+
+
+class BowerAdapterCase(TestCase):
+    """
+    BowerAdapter regression tests.
+    """
+
+    def test_create_components_root_subdirs(self):
+        """
+        create_components_root() creates missing intermediate directories.
+        """
+        if os.path.exists(TEST_COMPONENTS_ROOT):
+            shutil.rmtree(TEST_COMPONENTS_ROOT)
+
+        subdir = os.path.join(TEST_COMPONENTS_ROOT, 'sub', 'dir')
+        adapter = BowerAdapter(conf.BOWER_PATH, subdir)
+        adapter.create_components_root()
+        self.assertTrue(os.path.exists(subdir))
+
+        shutil.rmtree(TEST_COMPONENTS_ROOT)
 
 
 class BowerInstallCase(BaseBowerCase):
