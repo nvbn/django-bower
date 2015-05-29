@@ -1,4 +1,8 @@
-import collections
+try:
+    from collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
+
 from django.contrib.staticfiles.finders import FileSystemFinder
 from django.core.files.storage import FileSystemStorage
 from . import conf
@@ -12,11 +16,7 @@ class BowerFinder(FileSystemFinder):
         self.locations = [
             ('', self._get_bower_components_location()),
         ]
-        try:
-            self.storages = collections.OrderedDict()
-        except AttributeError:
-            from ordereddict import OrderedDict
-            self.storages = OrderedDict()
+        self.storages = OrderedDict()
 
         filesystem_storage = FileSystemStorage(location=self.locations[0][1])
         filesystem_storage.prefix = self.locations[0][0]
