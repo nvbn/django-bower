@@ -8,6 +8,8 @@ from ..exceptions import BowerNotInstalled
 class BaseBowerCommand(BaseCommand):
     """Base management command with bower support"""
 
+    requires_system_checks = False
+
     def handle(self, *args, **options):
         self._check_bower_exists()
         bower_adapter.create_components_root()
