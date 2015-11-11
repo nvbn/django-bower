@@ -31,7 +31,7 @@ class BowerFinder(FileSystemFinder):
         """
         # Bower 0.10 changed the default folder from 'components' to 'bower_components'.
         # Try 'bower_components' first, then fall back to trying 'components'.
-        for name in ['bower_components', 'components']:
+        for name in ['bower_components', 'components', '']:
             path = os.path.join(conf.COMPONENTS_ROOT, name)
             if os.path.exists(path):
                 return path
