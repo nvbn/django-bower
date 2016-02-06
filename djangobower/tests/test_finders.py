@@ -6,6 +6,7 @@ from ..finders import BowerFinder
 from .. import conf
 from .base import BaseBowerCase
 import os
+import os.path
 import shutil
 
 
@@ -85,15 +86,17 @@ class BowerFinderCase(BaseBowerCase):
 
     def test_find(self):
         """Test staticfinder find"""
-        path = self.finder.find('jquery/jquery.min.js')
+        test_path = os.path.join('jquery', 'jquery.min.js')
+        path = self.finder.find(test_path)
         self.assertEqual(path, os.path.join(
-            conf.COMPONENTS_ROOT, 'bower_components', 'jquery/jquery.min.js',
+            conf.COMPONENTS_ROOT, 'bower_components', test_path,
         ))
 
     def test_list(self):
         """Test staticfinder list"""
+        test_path = os.path.join('jquery', 'jquery.min.js')
         result = self.finder.list([])
         matched = [
-            part for part in result if part[0] == 'jquery/jquery.min.js'
+            part for part in result if part[0] == test_path
         ]
         self.assertEqual(len(matched), 1)
