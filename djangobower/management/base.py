@@ -23,7 +23,8 @@ class BaseBowerCommand(BaseCommand):
         bower_adapter.install(settings.BOWER_INSTALLED_APPS, *args)
 
     def _freeze(self):
-        packages = tuple(bower_adapter.freeze())
+        packages = list(bower_adapter.freeze())
+        packages.sort()
         output = 'BOWER_INSTALLED_APPS = {0}'.format(
             pformat(packages),
         )
