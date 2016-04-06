@@ -8,6 +8,7 @@ from django.utils.datastructures import OrderedSet
 
 def read_mains():
     for component in settings.BOWER_INSTALLED_APPS:
+        component = component.split('#')[0]
         try:
             with open(os.path.join(
                     settings.BOWER_COMPONENTS_ROOT,
