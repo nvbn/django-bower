@@ -19,7 +19,7 @@ class BaseBowerCommand(BaseCommand):
         if not bower_adapter.is_bower_exists():
             raise BowerNotInstalled()
 
-    def _install(self, args):
+    def _install(self, args=[]):
         bower_adapter.install(settings.BOWER_INSTALLED_APPS, *args)
 
     def _freeze(self):
