@@ -17,7 +17,9 @@ class Command(BaseBowerCommand):
     def handle(self, *args, **options):
         bower_command = options['bower_command']
         bower_args = options['bower_args']
-        if bower_command in ('install', 'freeze'):
-            getattr(self, '_{0}'.format(bower_command))()
+        if bower_command == 'install' and not bower_args:
+            self._install()
+        elif bower_command == 'freeze':
+            self._freeze()
         else:
             bower_adapter.call_bower([bower_command] + bower_args)
