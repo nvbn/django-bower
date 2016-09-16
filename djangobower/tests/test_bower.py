@@ -159,7 +159,7 @@ class BowerCommandCase(BaseBowerCase):
         """Test bower install <something>"""
         call_command('bower', 'install', 'jquery')
         bower_adapter.call_bower.assert_called_once_with(
-            ('install', 'jquery'))
+            ['install', 'jquery'])
 
     def test_freeze(self):
         """Test bower freeze command"""
@@ -170,4 +170,4 @@ class BowerCommandCase(BaseBowerCase):
         """Test simple call to bower"""
         call_command('bower', 'update')
         bower_adapter.call_bower.assert_called_once_with(
-            ('update',))
+            ['update'])
