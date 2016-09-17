@@ -10,6 +10,7 @@ env:
    - DJANGO_VERSION=1.7
    - DJANGO_VERSION=1.8
    - DJANGO_VERSION=1.9
+   - DJANGO_VERSION=1.10
 matrix:
   exclude:
     - python: "3.3"
@@ -22,6 +23,8 @@ matrix:
       env: DJANGO_VERSION=1.7
     - python: "3.3"
       env: DJANGO_VERSION=1.9
+    - python: "3.3"
+      env: DJANGO_VERSION=1.10
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq sloccount
@@ -35,7 +38,7 @@ install:
 script:
   - mkdir /home/travis/test_root/ -p
   - export TEST_PROJECT_ROOT=/home/travis/test_root/
-  - coverage run runtests.py test djangobower 2>test_out
+  - coverage run runtests.py test djangobower > >(tee stdout.log) 2> >(tee test_out >&2)
 after_success:
   - coverage report
   - pip install --quiet python-coveralls
