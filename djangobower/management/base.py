@@ -10,6 +10,10 @@ class BaseBowerCommand(BaseCommand):
 
     requires_system_checks = False
 
+    # add fake .options_list for Django>=1.10
+    if not hasattr(BaseCommand, 'option_list'):
+        option_list = ()
+
     def handle(self, *args, **options):
         self._check_bower_exists()
         bower_adapter.create_components_root()
