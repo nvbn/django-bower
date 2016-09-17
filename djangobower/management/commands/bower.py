@@ -7,8 +7,13 @@ class Command(BaseBowerCommand):
     help = 'Call bower in components root ({0}).'.format(
         bower_adapter._components_root)
 
+    # for Django>=1.10
+    def add_arguments(self, parser):
+        parser.add_argument('command', nargs='+')
+
     def handle(self, *args, **options):
         super(Command, self).handle(*args, **options)
+        args = args or tuple(options.pop('command'))
         if self._is_single_command('install', args):
             self._install([])
         elif self._is_single_command('freeze', args):
