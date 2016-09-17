@@ -5,7 +5,12 @@ from ..base import BaseBowerCommand
 class Command(BaseBowerCommand):
     help = 'Install bower apps'
 
-    option_list = BaseBowerCommand.option_list + (
+    if not hasattr(BaseBowerCommand, 'option_list'):
+        base_option_list = ()
+    else:
+        base_option_list = BaseBowerCommand.option_list
+
+    option_list = base_option_list + (
         make_option('-F',
                     action='store_true',
                     dest='force',
@@ -26,5 +31,5 @@ class Command(BaseBowerCommand):
 
         if options.get('allow-root'):
             args = args + ("--allow-root", )
-        
+
         self._install(args)
