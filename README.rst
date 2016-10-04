@@ -72,6 +72,8 @@ Download bower packages with the management command:
 
     ./manage.py bower install
 
+(If you get an error like ``/usr/bin/env: node: No such file or directory`` it may be because it's nodejs on your system. In that case you can add a symbolic link via ``ln -s /usr/bin/nodejs /usr/bin/node``)
+
 Add scripts in the template, like:
 
 .. code-block:: html+django
