@@ -10,6 +10,7 @@ Prepare project with:
 
     ./manage.py syncdb
     ./manage.py bower_install
+    ./manage.py collectstatic
 
 And run project with:
 
