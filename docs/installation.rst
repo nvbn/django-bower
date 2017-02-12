@@ -30,7 +30,7 @@ Specify path to components root (you need to use absolute path):
 
 .. code-block:: python
 
-    BOWER_COMPONENTS_ROOT = '/PROJECT_ROOT/components/'
+    BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 
 If you need, you can manually set path to bower
 
@@ -46,9 +46,7 @@ Example settings file with django-bower:
     import os
 
 
-    PROJECT_ROOT = os.path.abspath(
-        os.path.join(os.path.dirname(__file__), ".."),
-    )
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
@@ -64,11 +62,11 @@ Example settings file with django-bower:
         }
     }
 
-    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
     STATIC_URL = '/static/'
 
-    BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_ROOT, 'components')
+    BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 
     STATICFILES_FINDERS = (
         'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -96,7 +94,7 @@ Example settings file with django-bower:
     WSGI_APPLICATION = 'example.wsgi.application'
 
     TEMPLATE_DIRS = (
-        os.path.join(PROJECT_ROOT, 'templates'),
+        os.path.join(BASE_DIR, 'templates'),
     )
 
     INSTALLED_APPS = (
