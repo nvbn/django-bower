@@ -79,7 +79,7 @@ class BowerFreezeCase(BaseBowerCase):
         ])
 
     def test_no_newline_in_freeze(self):
-        """Test no newline in freezee"""
+        """Test no newline in freeze"""
         installed = bower_adapter.freeze()
         for package in installed:
             self.assertNotIn('\n', package)
