@@ -3,6 +3,7 @@ try:
 except ImportError:
     from ordereddict import OrderedDict
 
+from django.conf import settings
 from django.contrib.staticfiles.finders import FileSystemFinder
 from django.core.files.storage import FileSystemStorage
 from . import conf
@@ -24,6 +25,19 @@ class BowerFinder(FileSystemFinder):
             filesystem_storage = FileSystemStorage(location=root)
             filesystem_storage.prefix = prefix
             self.storages[root] = filesystem_storage
+
+    def list(self, ignore_patterns):
+        # inspired by
+        # https://stackoverflow.com/questions/12082902/how-do-i-ignore-static-files-of-a-particular-app-only-with-collectstatic/27368843
+        ignore = getattr(settings, 'BOWER_IGNORE_PATTERNS', None)
+
+        if ignore:
+            if ignore_patterns:
+                ignore_patterns.extend(ignore)
+            else:
+                ignore_patterns = ignore
+
+        return super().list(ignore_patterns)
 
     def _get_bower_components_location(self):
         """
