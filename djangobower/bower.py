@@ -27,9 +27,15 @@ class BowerAdapter(object):
 
     def call_bower(self, args):
         """Call bower with a list of args"""
-        proc = subprocess.Popen(
-            [self._bower_path] + list(args),
-            cwd=self._components_root)
+        try:
+            proc = subprocess.Popen(
+                [self._bower_path] + list(args),
+                cwd=self._components_root)
+        except OSError:
+            proc = subprocess.Popen(
+                [self._bower_path] + list(args),
+                cwd=self._components_root,
+                shell=True)
         proc.wait()
 
     def install(self, packages, *options):
@@ -61,11 +67,18 @@ class BowerAdapter(object):
 
     def freeze(self):
         """Yield packages with versions list"""
-        proc = subprocess.Popen(
-            [self._bower_path, 'list', '--json', '--offline', '--no-color'],
-            cwd=conf.COMPONENTS_ROOT,
-            stdout=subprocess.PIPE,
-        )
+        try:
+            proc = subprocess.Popen(
+                [self._bower_path, 'list', '--json', '--offline', '--no-color'],
+                cwd=conf.COMPONENTS_ROOT,
+                stdout=subprocess.PIPE,
+            )
+        except OSError:
+            proc = subprocess.Popen(
+                [self._bower_path, 'list', '--json', '--offline', '--no-color'],
+                cwd=conf.COMPONENTS_ROOT,
+                stdout=subprocess.PIPE,
+                shell=True)
         outs, errs = proc.communicate()
         output = outs.decode(sys.getfilesystemencoding())
 
