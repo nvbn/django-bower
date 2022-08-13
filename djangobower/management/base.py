@@ -1,4 +1,5 @@
 from pprint import pformat
+from django import VERSION as DJANGO_VERSION
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from ..bower import bower_adapter
@@ -8,7 +9,7 @@ from ..exceptions import BowerNotInstalled
 class BaseBowerCommand(BaseCommand):
     """Base management command with bower support"""
 
-    requires_system_checks = False
+    requires_system_checks = [] if DJANGO_VERSION >= (3, 2) else False
 
     # add fake .options_list for Django>=1.10
     if not hasattr(BaseCommand, 'option_list'):
